@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>{{data?.title}}</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" id="form">
+    <div fxLayout="column" >
+      <mat-form-field appearance="outline" [fxHide]="!data?.isEdit">
+        <mat-label>Id</mat-label>
+        <input matInput formControlName="id" required>
+        <mat-icon matPrefix>tag</mat-icon>        
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error *ngIf="form.get('name').errors?.required">Name is required.</mat-error>        
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" mask="separator.2" thousandSeparator="," separatorLimit="1000">
+        <mat-icon matPrefix>attach_money</mat-icon>
+        <mat-error *ngIf="form.get('name').errors?.required">Price is required.</mat-error>
+        <mat-error *ngIf="form.get('name').errors?.min">$1 to $1000</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Company</mat-label>
+        <input matInput formControlName="company">
+        <mat-icon matPrefix>business</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Maximun Age</mat-label>
+        <input matInput formControlName="ageRestriction" mask="000">
+        <mat-icon matPrefix>person</mat-icon>        
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-icon matPrefix>description</mat-icon>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="error">Cancel</button>
+  <button mat-button cdkFocusInitial color="primary" form="form" >{{data?.confirmButtonText}}</button>
+</mat-dialog-actions>
